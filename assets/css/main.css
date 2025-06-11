@@ -136,7 +136,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #787878;
+		color: #6e6e6e;
 		font-weight: 400;
 		line-height: 1em;
 		margin: 0 0 1em 0;
@@ -2221,6 +2221,7 @@ input, select, textarea {
 			margin: 1.5em 0 0 0;
 			padding-left: 2.25em;
 			position: relative;
+			color: #6e6e6e;
 		}
 
 			ul.labeled-icons li:first-child {
@@ -2232,7 +2233,7 @@ input, select, textarea {
 			}
 
 			ul.labeled-icons li h3 {
-				color: #b2b2b2;
+				color: #6e6e6e;
 				left: 0;
 				position: absolute;
 				text-align: center;
@@ -2592,12 +2593,13 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background-color: #292f34;
-		background-attachment: scroll,								scroll;
-		background-image: url("images/overlay.png"), url("../../images/bg.jpg");
-	  background-position: top left, center center;
+    /* background: #2b2f38;  new */
+	  background-color: #323843;
+		/* background-attachment: scroll,								scroll; 
+	  background-image: url("images/overlay.png"), url("../../images/bg.jpg"); */
+	  background-position: top left, center center; 
   	background-repeat: repeat, no-repeat;
-  	background-size: auto, cover;
+  	background-size: auto, cover; 
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%; 
 		left: 0;
