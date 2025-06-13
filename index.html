@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="is-preload">
+	<body>
 
 		<!-- Header -->
 			<header id="header">
@@ -28,22 +28,22 @@
 
 				<!-- One -->
 					<section id="one">
-						<header class="major">
+						<header class="major fade-animate">
 							<h2>About Me<br />
 						</header>
-						<p>Welcome! My name is Nicholas, and I am a Ph.D. student in the Department of Government at Harvard University. </p>
-						<p>Broadly speaking, I study Congress, inequality, and representation in American politics. One line of my research examines how the lack of working-class members of Congress impacts constituents, including its effects on blue-collar political participation, constituent service, and policy outcomes. Another line of research investigates federal policy responsiveness to the American electorate, especially to citizens from different economic backgrounds. I’m also interested in legislative accountability and broader democratic theory.</p>
-						<p>Before coming to Harvard, I worked in Washington, D.C. as a staffer at the House of Representatives. I graduated from Haverford College in 2022 with a degree in political science and philosophy.</p>
-						<ul class="actions">
+						<p class="fade-animate">Welcome! My name is Nicholas, and I am a Ph.D. student in the Department of Government at Harvard University. </p>
+						<p class="fade-animate">Broadly speaking, I study Congress, inequality, and representation in American politics. One line of my research examines how the lack of working-class members of Congress impacts constituents, including its effects on blue-collar political participation, constituent service, and policy outcomes. Another line of research investigates federal policy responsiveness to the American electorate, especially to citizens from different economic backgrounds. I’m also interested in legislative accountability and broader democratic theory.</p>
+						<p class="fade-animate">Before coming to Harvard, I worked in Washington, D.C. as a staffer at the House of Representatives. I graduated from Haverford College in 2022 with a degree in political science and philosophy.</p>
+						<ul class="actions fade-animate">
 							<li><a href="cv/conroy_cv.pdf" class="button">View CV</a></li>
 						</ul>
 					</section>
 
 				<!-- Three -->
 					<section id="three">
-						<h2>Contact Me</h2>
-						<h3>Email Address</h3>
-						<div class="col-4 col-12-small">
+						<h2 class="fade-animate">Contact Me</h2>
+						<h3 class="fade-animate">Email Address</h3>
+						<div class="col-4 col-12-small fade-animate">
 								<ul class="labeled-icons">
 						      <li>
 										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
@@ -52,8 +52,8 @@
 								</ul>
 							</div>
 					
-						<h3>Mailing Address</h3>
-						<div class="col-4 col-12-small">
+						<h3 class="fade-animate">Mailing Address</h3>
+						<div class="col-4 col-12-small fade-animate">
 								<ul class="labeled-icons">
 									<li>
 										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
@@ -408,6 +408,46 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			
+			<script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const faders = document.querySelectorAll(".fade-animate");
+      
+          const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+      
+                // Determine if it's scroll-triggered (not already visible on load)
+                if (!el.classList.contains("visible")) {
+                  const siblings = [...el.parentNode.querySelectorAll(".fade-animate")];
+                  const index = siblings.indexOf(el);
+                  const delay = index * 75;
+                  el.style.transitionDelay = `${delay}ms`;
+                }
+      
+                el.classList.add("visible");
+                observer.unobserve(el);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+          });
+      
+          faders.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+      
+            if (rect.top < window.innerHeight) {
+              // IN VIEW ON LOAD → slight shared delay (not staggered)
+              el.style.transitionDelay = "300ms";
+              el.classList.add("visible");
+            } else {
+              // Not in view yet → use scroll-triggered stagger
+              appearOnScroll.observe(el);
+            }
+          });
+        });
+      </script>
 	</body>
 </html>
