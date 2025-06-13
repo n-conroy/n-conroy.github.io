@@ -3227,3 +3227,14 @@ input, select, textarea {
 			}
 
 	}
+	
+/* Fade Animations (New) */
+	
+.fade-animate {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.fade-animate.visible {
+  opacity: 1;
+}
