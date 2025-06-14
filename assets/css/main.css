@@ -2593,11 +2593,10 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-    /* background: #2b2f38;  new */
-	  background-color: #323843;
-		/* background-attachment: scroll,								scroll; 
-	  background-image: url("images/overlay.png"), url("../../images/bg.jpg"); */
-	  background-position: top left, center center; 
+	  background-color: #2f3842; 
+	  background-attachment: local,								fixed; 
+	  background-image: url("images/overlay.png"), url("../../images/bg_original.jpg"); 
+	  background-position: top left, center top; 
   	background-repeat: repeat, no-repeat;
   	background-size: auto, cover; 
 		color: rgba(255, 255, 255, 0.5);
@@ -2609,7 +2608,9 @@ input, select, textarea {
 		top: 0;
 		width: 35%;
 		min-width: 330px; /* slightly more than the avatar width */
-		overflow: hidden; /* Prevents the panel from pushing down content */
+		overflow-x: hidden;
+		overflow-y: auto;
+		/* overflow: hidden; /* Prevents the panel from pushing down content */
 	}
 	
 
@@ -3084,7 +3085,7 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				background-attachment: scroll;
+				background-attachment: fixed;
 				background-color: #1f1815;
 			  background-image: url("images/overlay.png"), url("../../images/bg.jpg");
 				background-position: top left,						bottom center;
