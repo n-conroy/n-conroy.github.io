@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nicholas Conroy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="sticky-footer">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Nicholas Conroy</a>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="files/conroy_cv.pdf">CV</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="banner">
+    <img src="images/banner6.jpg" alt="Banner image" />
+    <div class="banner-text">Contact</div> 
+  </div>
+
+  <main class="contact-content">
+
+        <div class="contact-section fade-animate">
+          <h3>Email Address</h3>
+          <div class="contact-icon-block">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:nconroy@fas.harvard.edu">nconroy@fas.harvard.edu</a>
+          </div>
+        </div>
+  
+        <div class="contact-section fade-animate">
+          <h3>Mailing Address</h3>
+          <div class="contact-icon-block">
+            <i class="fas fa-home"></i>
+            <div>
+              Department of Government<br>
+              1737 Cambridge St.<br>
+              Cambridge, MA 02138
+            </div>
+          </div>
+        </div>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="mailto:nconroy@fas.harvard.edu" class="social-icon">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/nicholasconroy" target="_blank" class="social-icon">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
+  
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
+  
+  <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const faders = document.querySelectorAll(".fade-animate");
+      
+          const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+      
+                // Determine if it's scroll-triggered (not already visible on load)
+                if (!el.classList.contains("visible")) {
+                  const siblings = [...el.parentNode.querySelectorAll(".fade-animate")];
+                  const index = siblings.indexOf(el);
+                  const delay = index * 75;
+                  el.style.transitionDelay = `${delay}ms`;
+                }
+      
+                el.classList.add("visible");
+                observer.unobserve(el);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+          });
+      
+          faders.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+      
+            if (rect.top < window.innerHeight) {
+              // IN VIEW ON LOAD → slight shared delay (not staggered)
+              el.style.transitionDelay = "300ms";
+              el.classList.add("visible");
+            } else {
+              // Not in view yet → use scroll-triggered stagger
+              appearOnScroll.observe(el);
+            }
+          });
+        });
+      </script>
+  
+</body>
+</html>
