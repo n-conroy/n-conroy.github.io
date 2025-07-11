@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nicholas Conroy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Nicholas Conroy</a>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="files/conroy_cv.pdf">CV</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="banner">
+    <img src="images/banner6.jpg" alt="Banner image" />
+    <!-- <div class="banner-text">Welcome</div> -->
+  </div>
+
+  <main class="content">
+    <div class="image-container fade-animate">
+      <img src="images/photo1.jpg" alt="Nicholas Conroy">
+    </div>
+    <div class="text-container">
+      <h2 class="fade-animate">Welcome!</h2>
+      <p class="fade-animate">
+        I am a Ph.D. student in the Department of Government at Harvard University. 
+      </p>
+      <p class="fade-animate">
+        Broadly speaking, I study Congress, inequality, and representation in American politics. One line of my research examines how the lack of working-class members of Congress impacts constituents, including its effects on blue-collar political participation, constituent service, and policy outcomes. Another line of research investigates federal policy responsiveness to the American electorate, especially to citizens from different economic backgrounds. I’m also interested in legislative accountability and broader democratic theory.
+      </p>
+      <p class="fade-animate">
+        Before coming to Harvard, I worked in Washington, D.C. as a staffer at the House of Representatives. I graduated from Haverford College in 2022 with a degree in political science and philosophy.
+      </p>
+      <div class="cv-button-wrapper fade-animate">
+          <a href="files/conroy_cv.pdf" class="cv-button" target="_blank">View CV</a>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="https://twitter.com/yourhandle" target="_blank" class="social-icon">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="social-icon">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
+  
+  <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const faders = document.querySelectorAll(".fade-animate");
+      
+          const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+      
+                // Determine if it's scroll-triggered (not already visible on load)
+                if (!el.classList.contains("visible")) {
+                  const siblings = [...el.parentNode.querySelectorAll(".fade-animate")];
+                  const index = siblings.indexOf(el);
+                  const delay = index * 75;
+                  el.style.transitionDelay = `${delay}ms`;
+                }
+      
+                el.classList.add("visible");
+                observer.unobserve(el);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+          });
+      
+          faders.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+      
+            if (rect.top < window.innerHeight) {
+              // IN VIEW ON LOAD → slight shared delay (not staggered)
+              el.style.transitionDelay = "300ms";
+              el.classList.add("visible");
+            } else {
+              // Not in view yet → use scroll-triggered stagger
+              appearOnScroll.observe(el);
+            }
+          });
+        });
+      </script>
+  
+</body>
+</html>
