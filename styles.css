@@ -345,6 +345,13 @@ body {
   white-space: nowrap; 
 }
 
+.photo-credit {
+  font-size: 0.8rem;
+  color: #999;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: -2rem 0 2rem 1rem; /* pull it up slightly toward the banner */
+}
+
 /* Footer */
 
 .site-footer {
@@ -358,6 +365,13 @@ body {
   display: flex;
   justify-content: center;
   gap: 2rem;
+}
+
+.footer-credit {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #999;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .social-icon {
