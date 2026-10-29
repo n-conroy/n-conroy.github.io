@@ -4,30 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nicholas Conroy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body class="sticky-footer">
   <header class="navbar">
     <div class="nav-inner">
       <a href="/" class="logo">Nicholas Conroy</a>
-      <div class="hamburger" id="hamburger">&#9776;</div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
       <nav class="nav-links" id="navLinks">
         <a href="/">Home</a>
         <a href="/files/conroy_cv.pdf">CV</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact" aria-current="page">Contact</a>
       </nav>
     </div>
   </header>
   
   <div class="banner">
-    <img src="/images/banner6.jpg" alt="Banner image" />
-    <div class="banner-text">Contact</div> 
-  </div>
-  
-  <div class="photo-credit">
-    Photo Credit: Tushar Dayal
+    <picture>
+      <source type="image/avif" srcset="/images/banner6-1600.avif 1600w, /images/banner6-2400.avif 2400w, /images/banner6-3600.avif 3600w"
+              sizes="(max-width: 768px) 1440px, max(150vw, 1725px)">
+      <img src="/images/banner6-2400.jpg"
+           srcset="/images/banner6-1600.jpg 1600w, /images/banner6-2400.jpg 2400w, /images/banner6-3600.jpg 3600w"
+           sizes="(max-width: 768px) 1440px, max(150vw, 1725px)" width="2400" height="503"
+           alt="Banner image" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="banner-text">Contact</div>
+    <div class="photo-credit">
+      Photo Credit: Tushar Dayal
+    </div>
   </div>
 
   <main class="contact-content">
@@ -72,15 +81,8 @@
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-  </script>
-  
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
+      const open = navLinks.classList.toggle('show');
+      hamburger.setAttribute('aria-expanded', open);
     });
   </script>
   
@@ -115,7 +117,7 @@
       
             if (rect.top < window.innerHeight) {
               // IN VIEW ON LOAD → slight shared delay (not staggered)
-              el.style.transitionDelay = "300ms";
+              el.style.transitionDelay = "50ms";
               el.classList.add("visible");
             } else {
               // Not in view yet → use scroll-triggered stagger
