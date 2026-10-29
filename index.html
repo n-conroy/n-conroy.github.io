@@ -4,17 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nicholas Conroy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body class="home">
   <header class="navbar">
     <div class="nav-inner">
       <a href="/" class="logo">Nicholas Conroy</a>
-      <div class="hamburger" id="hamburger">&#9776;</div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
       <nav class="nav-links" id="navLinks">
-        <a href="/">Home</a>
+        <a href="/" aria-current="page">Home</a>
         <a href="files/conroy_cv.pdf">CV</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -22,18 +25,35 @@
   </header>
   
   <div class="banner">
-    <img src="images/banner6.jpg" alt="Banner image" />
+    <picture>
+      <!-- banner is hidden on phones; a blank placeholder stops the photo downloading there -->
+      <source media="(max-width: 768px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAACH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+      <source type="image/avif" srcset="images/banner6-1600.avif 1600w, images/banner6-2400.avif 2400w, images/banner6-3600.avif 3600w"
+              sizes="max(150vw, 1725px)">
+      <img src="images/banner6-2400.jpg"
+           srcset="images/banner6-1600.jpg 1600w, images/banner6-2400.jpg 2400w, images/banner6-3600.jpg 3600w"
+           sizes="max(150vw, 1725px)" width="2400" height="503"
+           alt="Banner image" fetchpriority="high" decoding="async" />
+    </picture>
     <!-- <div class="banner-text">Welcome</div> -->
-  </div>
-  
-  <div class="photo-credit">
-    Photo Credit: Tushar Dayal
+    <div class="photo-credit">
+      Photo Credit: Tushar Dayal
+    </div>
   </div>
 
 
   <main class="content">
     <div class="image-container fade-animate">
-      <img src="images/photo1.jpg" alt="Nicholas Conroy">
+      <!-- sizes are double the displayed width (340px / 440px) so the photo stays sharp when zoomed in -->
+      <picture>
+        <source type="image/avif"
+                srcset="images/photo1-1000.avif 1000w, images/photo1-1760.avif 1760w"
+                sizes="(max-width: 860px) 680px, 880px">
+        <img src="images/photo1-1000.jpg"
+             srcset="images/photo1-1000.jpg 1000w, images/photo1-1760.jpg 1760w"
+             sizes="(max-width: 860px) 680px, 880px" width="1760" height="1748"
+             alt="Nicholas Conroy" fetchpriority="high" decoding="async">
+      </picture>
     </div>
     <div class="text-container">
       <h2 class="fade-animate">Welcome!</h2>
@@ -70,7 +90,8 @@
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
+      const open = navLinks.classList.toggle('show');
+      hamburger.setAttribute('aria-expanded', open);
     });
   </script>
   
@@ -105,7 +126,7 @@
       
             if (rect.top < window.innerHeight) {
               // IN VIEW ON LOAD → slight shared delay (not staggered)
-              el.style.transitionDelay = "300ms";
+              el.style.transitionDelay = "50ms";
               el.classList.add("visible");
             } else {
               // Not in view yet → use scroll-triggered stagger
